@@ -1,4 +1,5 @@
 import random
+
 import time
 
 #グローバル変数定義
@@ -11,6 +12,7 @@ def shutudai(alphabet):
     #全アルファベットから対象文字を10個選択する。(重複なし)
     all_chars = random.sample(alphabet, num_of_all_chars)
     print("対象文字：")
+    print()
     for c in all_chars:
         print(c, end=" ")
     print()
