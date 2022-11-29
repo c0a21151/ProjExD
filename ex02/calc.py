@@ -1,50 +1,70 @@
 import tkinter as tk
 import tkinter.messagebox as tkm
 
-#練習3
+
+# 練習３
 def button_click(event):
     btn = event.widget
     num = btn["text"]
+    siki = entry.get() # 数式の文字列
     if num == "=":
-        siki = entry.get() #数式の文字列
-        res = eval(siki) #数式文字列の評価
-        entry.delete(0, tk.END) #表示文字列の削除
-        entry.insert(tk.END, res) #結果の挿入
-        
-    else: #「=」以外の文字
-    #tkm.showinfo("", f"[{num}]ボタンがクリックされました")
-    #練習6
+        siki = siki.replace("×", "*")
+        siki = siki.replace("÷", "/")
+        res = eval(siki) # 数式文字列の評価
+        entry.delete(0, tk.END) # 表示文字列の削除
+        entry.insert(tk.END, res) # 結果の挿入
+    elif num == "+/-":
+        entry.insert(tk.END, "-")
+    elif num == ".":
+        f =siki[-1]
+        if f == ".":
+            pass
+        else:
+            #i = siki.rfind(".")
+            entry.insert(tk.END, num)
+
+    elif num == "C":
+        entry.delete(0, tk.END) 
+    elif num == "AC":
+        entry.delete(0, tk.END) 
+        siki =siki[:-1]
+        entry.insert(tk.END, siki)
+    else: # 「=」以外のボタン字
+        #tkm.showinfo("", f"{num}ボタンがクリックされました")
+        # 練習６
         entry.insert(tk.END, num)
 
-#練習1
+    
+# 練習１
 root = tk.Tk()
-root.title("電卓基本機能")
-root.geometry("300x500")
+root.geometry("400x600")
 
-#練習4
-entry = tk.Entry(root, justify="right", wight=10, font=("", 40))
+# 練習４
+entry = tk.Entry(root, justify="right", width=10, font=("",40))
 entry.grid(row=0, column=0, columnspan=3)
 
-#練習2
+# 練習２
 r, c = 1, 0
-for num in range(9, -1, -1):
+nums = ["C", "AC", " ", "÷", 7, 8, 9, "×", 4, 5, 6, "-", 1, 2, 3, "+", "+/-", 0, ".", "="]
+for num in nums:
     button = tk.Button(root, text=f"{num}", width=4, height=2, font=("", 30))
     button.grid(row=r, column=c)
     button.bind("<1>", button_click)
     c += 1
-    if c%3 == 0:
+    if c%4 == 0:
         r += 1
-        c =0
+        c = 0
+    
 
-#練習5
-operators = ["+", "="]
-for ope in operators:
-    button = tk.Button(root, text=f"{ope}", width=4, height=2, font=("", 30))
-    button.grid(row=r, column=c)
-    button.bind("<1>", button_click)
-    c += 1
-    if c%3 == 0:
-        r += 1
-        c =0
+# 練習５
+#operators = ["+", "="]
+#for ope in operators:
+#    button = tk.Button(root, text=f"{ope}", width=4, height=2, font=("", 30))
+#    button.grid(row=r, column=c)
+#    button.bind("<1>", button_click)
+#    c += 1
+#    if c%3 == 0:
+#        r += 1
+#        c = 0
 
 root.mainloop()
