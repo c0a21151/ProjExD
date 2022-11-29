@@ -13,19 +13,19 @@ def button_click(event):
         res = eval(siki) # 数式文字列の評価
         entry.delete(0, tk.END) # 表示文字列の削除
         entry.insert(tk.END, res) # 結果の挿入
-    elif num == "+/-":
+    elif num == "+/-": #プラスマイナス変換
         entry.insert(tk.END, "-")
-    elif num == ".":
+    elif num == ".": #浮動小数点の追加
         f =siki[-1]
-        if f == ".":
+        if f == ".": #連続で押しても挿入されない
             pass
         else:
             #i = siki.rfind(".")
             entry.insert(tk.END, num)
 
-    elif num == "AC":
+    elif num == "AC": #オールクリア
         entry.delete(0, tk.END) 
-    elif num == "C":
+    elif num == "C": #クリア
         entry.delete(0, tk.END) 
         siki =siki[:-1]
         entry.insert(tk.END, siki)
@@ -55,16 +55,5 @@ for num in nums:
         r += 1
         c = 0
     
-
-# 練習５
-#operators = ["+", "="]
-#for ope in operators:
-#    button = tk.Button(root, text=f"{ope}", width=4, height=2, font=("", 30))
-#    button.grid(row=r, column=c)
-#    button.bind("<1>", button_click)
-#    c += 1
-#    if c%3 == 0:
-#        r += 1
-#        c = 0
 
 root.mainloop()
