@@ -23,9 +23,9 @@ def button_click(event):
             #i = siki.rfind(".")
             entry.insert(tk.END, num)
 
-    elif num == "C":
-        entry.delete(0, tk.END) 
     elif num == "AC":
+        entry.delete(0, tk.END) 
+    elif num == "C":
         entry.delete(0, tk.END) 
         siki =siki[:-1]
         entry.insert(tk.END, siki)
