@@ -19,7 +19,7 @@ def check_bound(obj_rct, scr_rct):
 
 
 """
-def restart():
+def restart():  #ウィンドウを閉じずに再スタートする
     # root = tk.Tk()
     # tkm.showinfo()
     key_dct = pg.key.get_pressed()
@@ -99,7 +99,7 @@ def main():
         vy *= tate
 
         # 練習８
-        if tori_rct.colliderect(bomb_rct):
+        if tori_rct.colliderect(bomb_rct): #こうかとんが爆弾に当たったら
             ed =  time.time()
 
             vx = 0
@@ -117,6 +117,7 @@ def main():
             tkm.showinfo("gameover", f"こうかとんは{(ed-st):.2f}秒で爆弾に当たった \n 続けますか？")
             
             """
+            #こうかとんが爆弾に当たったら逃げた時間と続けるか聞く
             #フォントの用意 
             font1 = pygame.font.SysFont("hg正楷書体pro", 150)
             font2 = pygame.font.SysFont(None, 50)
