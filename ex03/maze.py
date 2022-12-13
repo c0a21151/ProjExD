@@ -20,7 +20,7 @@ def main_proc():
     if key == "Left": mx -= 1
     if key == "Right": mx += 1
     if maze_lst[mx][my] == 0: #移動先が道だったら
-        tori1 = tk.PhotoImage(file="9.png")
+        tori1 = tk.PhotoImage(file="fig/9.png")
         canvas.create_image(cx, cy, image=tori1, tag="kokaton9")
 
     if maze_lst[mx][my] == 1:  #移動先が壁だったら
@@ -28,7 +28,7 @@ def main_proc():
         if key == "Down": my -= 1
         if key == "Left": mx += 1
         if key == "Right": mx -= 1
-        tori2 = tk.PhotoImage(file="8.png")
+        tori2 = tk.PhotoImage(file="fig/8.png")
         canvas.create_image(cx, cy, image=tori2, tag="kokaton8")
 
     cx, cy = mx*100+50, my*100+50
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     mx, my = 1, 1
     cx, cy = mx*100+50, my*100+50
-    tori0 = tk.PhotoImage(file="0.png")
+    tori0 = tk.PhotoImage(file="fig/0.png")
     canvas.create_image(cx, cy, image=tori0, tag="kokaton0")  #こうかとんの初期画像
     ex, ey = mx*1500-150, my*900-150
     get = tk.PhotoImage(file="apple.PNG")  #ゴールはりんごの画像
