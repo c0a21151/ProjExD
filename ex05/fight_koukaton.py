@@ -4,33 +4,6 @@ import sys
 import time
 
 
-class Explosion(pg.sprite.Sprite):
-    """An explosion. Hopefully the Alien and not the player!"""
-
-    defaultlife = 12
-    animcycle = 3
-    images = []
-
-    def __init__(self, actor):
-        pg.sprite.Sprite.__init__(self, self.containers)
-        self.image = self.images[0]
-        self.rect = self.image.get_rect(center=actor.rect.center)
-        self.life = self.defaultlife
-
-    def update(self):
-        """called every time around the game loop.
-
-        Show the explosion surface for 'defaultlife'.
-        Every game tick(update), we decrease the 'life'.
-
-        Also we animate the explosion.
-        """
-        self.life = self.life - 1
-        self.image = self.images[self.life // self.animcycle % 2]
-        if self.life <= 0:
-            self.kill()
-
-
 class Screen:
     def __init__ (self, title, wh, img_path):
         # 練習１
@@ -52,7 +25,6 @@ class Bird:
     pg.K_RIGHT: [+1, 0],
     }
 
-    
     def __init__(self, img_path, ratio, xy):
         self.sfc = pg.image.load(img_path)  #"fig/6.png"
         self.sfc = pg.transform.rotozoom(self.sfc, 0, ratio)  #2.0
@@ -95,7 +67,7 @@ class Bomb:
         self.blit(scr)
 
 
-class Shot:
+class Shot:  #弾
     def __init__(self, vxy, scr:Screen, kkt:Bird):
         self.sfc = pg.Surface((20, 20))
         pg.draw.rect(self.sfc, "black",   (0, 0, 10, 10))
@@ -143,8 +115,8 @@ def main():
 
     # 練習５
     bkd_lst = []
-    bkd_color = ["red", "blue", "green", "yellow", "gold", "silver"]
-    for i in bkd_color:
+    bkd_color = ["red", "blue", "green", "yellow", "gold", "silver"]  #爆弾の色
+    for i in bkd_color:  #爆弾の色リスト分爆弾を作る
         vx = random.choice([-1, +1])
         vy = random.choice([-1, +1])
         size = random.choice([10, 15])
@@ -153,10 +125,8 @@ def main():
     bkd.update(scr)
 
     tama_lst = []
-    # tama = Shot((0, 5), scr, kkt)
-    # tama.update(scr)
 
-    sht = True
+    sht = True  #フラグをTrue (Trueの時弾が発射できる)
 
     # 練習２
     while True:
@@ -173,21 +143,21 @@ def main():
                 return
 
         key_dct = pg.key.get_pressed()
-        if key_dct[pg.K_SPACE]:
+        if key_dct[pg.K_SPACE]:  #SpaceKeyが押されたときshtがTrueなら弾を発射
             if sht == True:
                 tama = Shot((0, 5), scr, kkt)
                 tama_lst.append(tama)
-                sht = None
+                sht = None  #フラグをNone
             
         for i in tama_lst:
             i.update(scr)
 
         timeend = time.time()  #時間取得
-        if timeend-timebgin>2:
-            sht = True
+        if timeend-timebgin>2:  #弾発射から時間が2秒以上経過していたらshtをTrueにする
+            sht = True  #フラグをTrue
             timebgin = time.time()  #時間取得
 
-        for i in tama_lst:
+        for i in tama_lst:  #弾が爆弾に当たったとき
             for n in bkd_lst:
                 if i == n:
                     del i
